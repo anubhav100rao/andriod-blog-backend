@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
-const SECRET_KEY = process.env.SECRET_KEY;
+const SECRET_KEY = process.env.SECRET_KEY || "NOTESAPI";
 
 const signup = async(req, res) => {
     // check existing user
@@ -20,11 +20,15 @@ const signup = async(req, res) => {
             })
         }
         const hashedPassword = await bcrypt.hash(password, 10); // salt = 10
+
+
         const result = await UserModel.create({
             email,
             password: hashedPassword,
             username
         })
+
+
 
         const token = jwt.sign({
             email: res.email,
