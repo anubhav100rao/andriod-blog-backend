@@ -31,8 +31,7 @@ app.get("*", (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 
-const url =
-  "mongodb+srv://king100rao:king100rao@cluster0.dxkkr.mongodb.net/notes_db?retryWrites=true&w=majority";
+const url = process.env.MONGO_URL;
 mongoose
   .connect(url)
   .then(() => {
